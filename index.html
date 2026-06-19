@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veronica Forchielli — Chef</title>
+<style>
+  :root{
+    --sage:#a8ab8a;
+    --sage-deep:#9a9d7c;
+    --cream:#f1f0e3;
+    --ink:#2b2c22;
+    --ink-soft:#494a3c;
+    --line:rgba(43,44,34,.2);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+    background:var(--sage);
+    color:var(--ink);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .display{font-family:Georgia,'Times New Roman',serif;}
+  .italic{font-style:italic;}
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:28px clamp(24px,6vw,90px);
+    font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .topbar .socials{display:flex;gap:20px;align-items:center}
+  .brand-logo{height:clamp(72px,9vw,116px);width:auto;display:block}
+  .name-row{display:flex;align-items:center;gap:clamp(16px,3vw,34px);margin-bottom:30px;flex-wrap:wrap}
+  .name-row .hero-name{margin-bottom:0}
+  .topbar a{color:var(--ink-soft);text-decoration:none;transition:color .25s}
+  .topbar a:hover{color:var(--ink)}
+  .topbar .socials a svg{width:18px;height:18px;fill:var(--ink-soft);transition:fill .25s;display:block}
+  .topbar .socials a:hover svg{fill:var(--ink)}
+  /* ---------- HERO ---------- */
+  .hero{display:block;padding:0}
+  .hero-photo-wrap{position:relative;opacity:0;animation:rise 1.1s cubic-bezier(.2,.7,.2,1) .1s forwards}
+  .hero-photo{width:100%;height:clamp(320px,58vh,580px);object-fit:cover;object-position:center 24%;display:block}
+  .img-caption{position:absolute;bottom:18px;left:clamp(24px,6vw,90px);color:var(--cream);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+  .hero-band{padding:clamp(30px,4.5vw,52px) clamp(24px,6vw,90px) clamp(56px,7vw,96px);opacity:0;animation:rise 1.1s cubic-bezier(.2,.7,.2,1) .3s forwards}
+  .eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+  .band-row{display:flex;align-items:center;justify-content:space-between;gap:clamp(18px,3vw,40px);flex-wrap:wrap;margin:16px 0 28px}
+  .hero-name{font-size:clamp(2.5rem,6.5vw,5.4rem);line-height:.98;font-weight:300;letter-spacing:-.01em;margin:0}
+  .hero-name .italic{font-weight:400}
+  .brand-logo{height:clamp(72px,8vw,112px);width:auto;display:block}
+  .band-foot{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+  .hero-tag{font-size:clamp(1.05rem,1.6vw,1.3rem);max-width:48ch;color:var(--ink-soft);font-weight:300;margin:0}
+  .hero-tag .display{font-style:italic;color:var(--ink)}
+  .cta-row{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:12px;padding:15px 30px;border-radius:40px;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;font-family:inherit;transition:all .35s cubic-bezier(.2,.7,.2,1)}
+  .btn-primary{background:var(--ink);color:var(--cream)}
+  .btn-primary:hover{background:#000;transform:translateY(-2px)}
+  .btn-primary .arrow{transition:transform .35s}
+  .btn-primary:hover .arrow{transform:translateX(5px)}
+  .btn-ghost{color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{background:rgba(42,42,38,.06)}
+  
+  /* ---------- QUICK FACTS STRIP ---------- */
+  .facts{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(4,1fr);
+    background:var(--sage-deep);
+  }
+  .fact{
+    padding:34px clamp(20px,3vw,40px);
+    border-right:1px solid var(--line);
+  }
+  .fact:last-child{border-right:none}
+  .fact .num{font-family:Georgia,'Times New Roman',serif;font-size:2rem;font-weight:300;display:block;margin-bottom:6px}
+  .fact .lbl{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+
+  /* ---------- EXPANDABLE STORY ---------- */
+  .more-wrap{overflow:hidden}
+  .story{
+    max-height:0;opacity:0;
+    transition:max-height 1s cubic-bezier(.2,.7,.2,1),opacity .8s ease,padding .8s ease;
+    background:var(--cream);
+  }
+  .story.open{
+    max-height:5000px;opacity:1;
+  }
+  .story-inner{
+    padding:clamp(60px,9vw,120px) clamp(24px,6vw,90px);
+    max-width:1100px;margin:0 auto;
+  }
+  .section-label{
+    font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-soft);margin-bottom:14px;
+  }
+  .story h2{
+    font-family:Georgia,'Times New Roman',serif;font-weight:300;
+    font-size:clamp(1.9rem,4vw,3rem);line-height:1.1;margin-bottom:34px;
+  }
+  .story h2 .italic{font-weight:400}
+  .prose p{
+    font-size:clamp(1.02rem,1.4vw,1.15rem);color:var(--ink-soft);
+    max-width:62ch;margin-bottom:22px;
+  }
+  .prose p .display{font-style:italic;color:var(--ink)}
+
+  .block{margin-top:clamp(50px,7vw,90px)}
+
+  /* galleria piatti */
+  .gallery{
+    margin-top:38px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:230px;
+    gap:14px;
+  }
+  .gallery figure{position:relative;overflow:hidden;border-radius:3px;margin:0}
+  .gallery img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform 1.1s cubic-bezier(.2,.7,.2,1);
+  }
+  .gallery figure:hover img{transform:scale(1.06)}
+  /* layout: 5 foto su 2 righe piene (4 colonne) */
+  .gallery{grid-auto-rows:215px}
+  .gallery figure:nth-child(1){grid-column:span 2;grid-row:span 1}
+  .gallery figure:nth-child(2){grid-column:span 1;grid-row:span 1}
+  .gallery figure:nth-child(3){grid-column:span 1;grid-row:span 1}
+  .gallery figure:nth-child(4){grid-column:span 2;grid-row:span 1}
+  .gallery figure:nth-child(5){grid-column:span 2;grid-row:span 1}
+
+  /* narrazione lunga */
+  .narrative p{
+    font-size:clamp(1.02rem,1.4vw,1.18rem);color:var(--ink-soft);
+    max-width:64ch;margin-bottom:24px;line-height:1.85;
+  }
+  .narrative p .display{font-style:italic;color:var(--ink)}
+  .pull{
+    font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:300;
+    font-size:clamp(1.5rem,3.2vw,2.3rem);line-height:1.3;
+    color:var(--ink);max-width:20ch;
+    margin:clamp(40px,6vw,70px) 0;padding-left:28px;
+    border-left:2px solid var(--ink);
+  }
+  .signature{
+    font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:1.4rem;
+    margin-top:40px;color:var(--ink);
+  }
+
+  /* timeline */
+  .timeline{margin-top:30px;border-top:1px solid var(--line)}
+  .role{
+    display:grid;grid-template-columns:200px 1fr;gap:24px;
+    padding:22px 0;border-bottom:1px solid var(--line);
+    transition:background .3s,padding-left .3s;
+  }
+  .role:hover{background:rgba(42,42,38,.03);padding-left:10px}
+  .role .when{font-size:.82rem;letter-spacing:.06em;color:var(--ink-soft);padding-top:3px}
+  .role .what .pos{font-family:Georgia,'Times New Roman',serif;font-size:1.15rem;margin-bottom:3px}
+  .role .what .place{font-size:.92rem;color:var(--ink-soft)}
+
+  /* two col lists */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);margin-top:30px}
+  .cols h3{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:1.25rem;margin-bottom:18px}
+  .cols ul{list-style:none}
+  .cols li{padding:11px 0;border-bottom:1px solid var(--line);font-size:.95rem;color:var(--ink-soft)}
+  .cols li strong{color:var(--ink);font-weight:400;display:block;font-size:1rem;margin-bottom:2px}
+
+  /* contact */
+  .contact{
+    position:relative;
+    background:var(--ink);color:var(--cream);
+    padding:clamp(80px,12vw,150px) clamp(24px,6vw,90px);
+    text-align:center;overflow:hidden;
+  }
+  .contact::before{
+    content:"";position:absolute;inset:0;
+    background:url('https://res.cloudinary.com/dumit3klq/image/upload/19_kgfnns.jpg') center/cover no-repeat;
+    opacity:.5;
+  }
+  .contact::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(26,26,22,.55),rgba(26,26,22,.8));
+  }
+  .contact > *{position:relative;z-index:1}
+  .contact h2{font-family:Georgia,'Times New Roman',serif;font-weight:300;font-size:clamp(2rem,5vw,3.4rem);margin-bottom:30px}
+  .contact h2 .italic{font-weight:400}
+  .contact a.mail{
+    color:var(--cream);font-family:Georgia,'Times New Roman',serif;font-style:italic;
+    font-size:clamp(1.2rem,2.5vw,1.7rem);text-decoration:none;
+    border-bottom:1px solid rgba(244,243,234,.4);padding-bottom:4px;
+    transition:border-color .3s;
+  }
+  .contact a.mail:hover{border-color:var(--cream)}
+  .contact .phone{margin-top:20px;color:rgba(244,243,234,.7);letter-spacing:.1em}
+  .contact .socials{margin-top:40px;display:flex;gap:28px;justify-content:center;align-items:center}
+  .contact .socials a{color:rgba(244,243,234,.75);text-decoration:none;transition:opacity .3s}
+  .contact .socials a:hover{opacity:1}
+  .contact .socials a svg{width:22px;height:22px;fill:rgba(244,243,234,.75);transition:fill .3s;display:block}
+  .contact .socials a:hover svg{fill:var(--cream)}
+
+  @keyframes rise{to{opacity:1;transform:translateY(0) scale(1)}}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:820px){
+    .hero{grid-template-columns:1fr;min-height:auto}
+    .hero-right{order:-1;max-width:420px}
+    .facts{grid-template-columns:1fr 1fr}
+    .fact:nth-child(2){border-right:none}
+    .fact:nth-child(1),.fact:nth-child(2){border-bottom:1px solid var(--line)}
+    .role{grid-template-columns:1fr;gap:4px}
+    .cols{grid-template-columns:1fr}
+    .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+    .gallery figure:nth-child(n){grid-column:span 1;grid-row:span 1}
+    .gallery figure:nth-child(1){grid-column:span 2;grid-row:span 2}
+    .topbar{padding:20px 24px}
+    .topbar .socials{gap:16px;font-size:.7rem}
+  }
+  @media(max-width:560px){
+    .topbar .socials{display:none}
+    .topbar{justify-content:center}
+  }
+
+  .privacy-link{display:block;color:rgba(244,243,234,.5);font-size:.75rem;letter-spacing:.1em;text-decoration:none;margin-bottom:20px;transition:color .3s}
+  .privacy-link:hover{color:rgba(244,243,234,.8)}
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center;padding:20px}
+  .modal-box{background:#f1f0e3;color:#2b2c22;max-width:680px;width:100%;max-height:85vh;overflow-y:auto;border-radius:6px;padding:clamp(30px,5vw,50px);position:relative}
+  .modal-box h2{font-family:Georgia,serif;font-weight:400;font-size:24px;margin-bottom:20px}
+  .modal-box h3{font-family:Georgia,serif;font-weight:400;font-size:17px;margin:20px 0 8px}
+  .modal-box p{font-size:13.5px;line-height:1.75;color:#494a3c;margin-bottom:12px}
+  .modal-close{position:absolute;top:16px;right:20px;font-size:22px;cursor:pointer;color:#6a6b56;background:none;border:none;line-height:1}
+  .modal-close:hover{color:#2b2c22}
+
+</style>
+</head>
+<body>
+
+  <!-- LANDING -->
+  <main class="hero">
+    <div class="hero-photo-wrap">
+      <img src="https://res.cloudinary.com/dumit3klq/image/upload/12_dc1v8e.jpg" alt="Lo chef Veronica Forchielli mentre impiatta" class="hero-photo">
+      <span class="img-caption">Alta cucina · Montagna</span>
+    </div>
+    <div class="hero-band">
+      <p class="eyebrow">Chef di Cucina</p>
+      <div class="band-row">
+        <h1 class="hero-name display">veronica <span class="italic">forchielli</span></h1>
+        <img src="https://res.cloudinary.com/dumit3klq/image/upload/Logo_frzfd.png" alt="Biosfera · Gastronomia Alpina" class="brand-logo">
+      </div>
+      <div class="band-foot">
+        <p class="hero-tag">Ho trasformato una passione in un lavoro che amo. Non soltanto cuoca, ma <span class="display">narratrice</span> della storia e della cultura di un territorio.</p>
+        <div class="cta-row">
+          <button class="btn btn-primary" id="readMore">Leggi di più <span class="arrow">→</span></button>
+          <a class="btn btn-ghost" href="mailto:vero.forchielli@gmail.com">Contattami</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- QUICK FACTS -->
+  <section class="facts">
+    <div class="fact"><span class="num display">15+</span><span class="lbl">Anni in cucina</span></div>
+    <div class="fact"><span class="num display">Niko Romito</span><span class="lbl">Scuola di formazione</span></div>
+    <div class="fact"><span class="num display">Sommelier</span><span class="lbl">Qualifica A.I.S.</span></div>
+    <div class="fact"><span class="num display">Docente</span><span class="lbl">E.N.A.I.P. Trentino</span></div>
+  </section>
+
+  <!-- EXPANDABLE STORY -->
+  <div class="more-wrap">
+    <section class="story" id="story">
+      <div class="story-inner">
+
+        <p class="section-label">La filosofia</p>
+        <h2 class="display">Non soltanto cuoca, ma <span class="italic">narratrice</span></h2>
+        <div class="prose">
+          <p>Ho trasformato una passione in un lavoro che amo, svolto in rinomati ristoranti stellati e nelle più semplici osterie di paese. Queste esperienze mi hanno consentito di comprendere la cucina italiana, elaborando una mia <span class="display">personale filosofia</span>.</p>
+          <p>L'amore per la terra è un valore che la mia famiglia mi ha trasmesso sin dai primi anni: natura, storia e cultura sono un patrimonio che ognuno di noi ha il dovere di tutelare, per trasmetterlo a chi verrà dopo.</p>
+          <p>La mia cucina è diventata il mezzo per trasmettere agli ospiti la conoscenza dei prodotti della terra, attraverso colori, profumi e sapori. Ho ricercato nella semplicità la mia cifra stilistica, convinta che la comprensibilità di un piatto sia il risultato più complesso da conseguire.</p>
+        </div>
+
+        <div class="block">
+          <p class="section-label">I piatti</p>
+          <h2 class="display">La materia prima al <span class="italic">centro</span></h2>
+          <div class="gallery">
+            <figure><img src="https://res.cloudinary.com/dumit3klq/image/upload/5_celeaa.jpg" alt="Piatto di selvaggina scomposto" loading="lazy"></figure>
+            <figure><img src="https://res.cloudinary.com/dumit3klq/image/upload/16_etzy46.jpg" alt="Selvaggina con erbe aromatiche su vassoio" loading="lazy"></figure>
+            <figure><img src="https://res.cloudinary.com/dumit3klq/image/upload/8_udtp2z.jpg" alt="Brodo con tortelli e tartufo" loading="lazy"></figure>
+            <figure><img src="https://res.cloudinary.com/dumit3klq/image/upload/10_tmayue.jpg" alt="Composizione di assaggi: trota, verdure, tartufi" loading="lazy"></figure>
+            <figure><img src="https://res.cloudinary.com/dumit3klq/image/upload/2_anonjm.jpg" alt="Pane artigianale" loading="lazy"></figure>
+          </div>
+        </div>
+
+        <div class="block">
+          <p class="section-label">La storia</p>
+          <h2 class="display">Una piccola <span class="italic">breve storia</span></h2>
+          <div class="narrative">
+            <p>Ho da sempre due grandi passioni: la buona tavola e la cucina. Mi è stato facile iniziare a lavorare ai fornelli, anche perché avevo capito che lo studio non avrebbe esercitato su di me la stessa attrazione. La mia famiglia è stata la mia scuola: mia madre lavorava in macelleria, mio padre dedicava il tempo libero agli ulivi e agli animali. La semplicità della vita di campagna mi ha fatto scoprire i valori più autentici.</p>
+            <p>I primi anni li ho trascorsi in un ristorante tra Pesaro e Fano: troppo giovane per la cucina, servivo in sala, ma dopo il servizio mi dedicavo alla pulizia del pesce. Quando smisi di cucinare passai all'Antico Furlo, con lo chef Alberto Melagrana, che mi insegnò davvero molto e mi portò con la sua brigata in Armenia a cucinare per il G7 — ero ancora minorenne, e davanti alla mia camera stazionava una guardia del corpo.</p>
+            <p>Dopo un anno in Francia, a Metz, conclusi che la materia prima e la cucina italiana erano comunque inarrivabili. Tornata in Italia, mi iscrissi all'Accademia Marchesi a Milano: il corso durò sei mesi, ma ogni giorno il grande Maestro era con noi. Ero l'unica donna, anche lì.</p>
+
+            <p class="pull">«Sarai la mia chef per ALT, ma ricordati: non perché sei brava, soltanto perché sei l'unica.»</p>
+
+            <p>Tra i miei libri il preferito era sempre Niko Romito. Andai a cena a Casadonna, trovai il coraggio di dirgli che volevo lavorare con lui. Mi rispose di no — ero già chef. Per un anno gli scrissi ogni mese, fino a quando accettò: iniziai con 400 euro al mese più l'alloggio. Dopo sette mesi scrisse "ALT" sul muro di mattonelle bianche, e poco dopo mi affidò la cucina di quel nuovo progetto.</p>
+            <p>Sono seguiti il Senso di Alfio Ghezzi a Rovereto, il ruolo di chef in hotel di alta montagna, l'insegnamento — che porto avanti tuttora come docente esterno — il Bulgari Hotel di Milano come sous chef, e il Due Pini dello Chalet del Sogno a Madonna di Campiglio, dove ho creduto sempre più al «chilometro buono» che al chilometro zero.</p>
+            <p>L'ultima sfida è l'Hôtellerie de Mascognaz, in Val d'Aosta: qui realizzo quella che amo definire una cucina vera, fatta di materie prime ricercate con cura nel rapporto diretto con allevatori e coltivatori. Erbe selvatiche, carni di cortile, pesci di fiume, farine biologiche macinate a pietra, e cotture tradizionali, lontane da quelle tecniche che oggi tendono a omologare i piatti.</p>
+            <p class="signature">Veronica Forchielli</p>
+          </div>
+        </div>
+
+        <div class="block">
+          <p class="section-label">Percorso professionale</p>
+          <h2 class="display">Esperienza in <span class="italic">cucina</span></h2>
+          <div class="timeline">
+            <div class="role"><div class="when">2025 — 2026</div><div class="what"><div class="pos">Chef di Cucina</div><div class="place">Hôtellerie de Mascognaz</div></div></div>
+            <div class="role"><div class="when">2024 — 2025</div><div class="what"><div class="pos">Chef di Cucina</div><div class="place">Ristorante Due Pini · Hotel Chalet del Sogno</div></div></div>
+            <div class="role"><div class="when">2023 — 2024</div><div class="what"><div class="pos">Sous Chef</div><div class="place">Il Ristorante Niko Romito · Bulgari Hotel Milano</div></div></div>
+            <div class="role"><div class="when">2021 — 2022</div><div class="what"><div class="pos">Executive Chef</div><div class="place">Chalet Laura Lodge Hotel</div></div></div>
+            <div class="role"><div class="when">2020 — 2021</div><div class="what"><div class="pos">Capo Partita ai Secondi</div><div class="place">Ristorante Senso · Alfio Ghezzi</div></div></div>
+            <div class="role"><div class="when">2018 — 2020</div><div class="what"><div class="pos">Chef · Stage formativo</div><div class="place">Alt Stazione del Gusto · Casadonna Reale · Niko Romito</div></div></div>
+            <div class="role"><div class="when">2014 — 2018</div><div class="what"><div class="pos">Chef</div><div class="place">Urbino dei Laghi · Hotel Chalet del Brenta</div></div></div>
+            <div class="role"><div class="when">2008 — 2016</div><div class="what"><div class="pos">Apprendista · Aiuto Cuoco</div><div class="place">Il Gazzebo · Osteria Pasqualon · Restaurant 83 (FR) · Antico Furlo</div></div></div>
+          </div>
+        </div>
+
+        <div class="block cols">
+          <div>
+            <h3 class="display">Formazione</h3>
+            <ul>
+              <li><strong>Docente Formatore</strong>E.N.A.I.P. Trentino · 2020 — oggi</li>
+              <li><strong>Tecnico dei Servizi Ristorativi</strong>I.P.S.S.A.R. S. Marta · 2005 — 2010</li>
+              <li><strong>Sommelier A.I.S.</strong>2008 — 2010</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="display">Specializzazioni</h3>
+            <ul>
+              <li><strong>Qualifica di Cucina</strong>Accademia Marchesi · 2015</li>
+              <li><strong>Cucina Molecolare</strong>Italian Food Academy · 2016</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- CONTACT -->
+  <footer class="contact">
+    <h2 class="display">Parliamo di <span class="italic">cucina</span></h2>
+    <a class="mail" href="mailto:vero.forchielli@gmail.com">vero.forchielli@gmail.com</a>
+    <div class="phone">+39 334 161 1421</div>
+    <a href="#privacy" class="privacy-link" onclick="document.getElementById('privacy-modal').style.display='flex';return false;">Privacy &amp; Cookie Policy</a>
+    <div class="socials">
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
+      <a href="https://www.instagram.com/veronicaforchielli" target="_blank" rel="noopener" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+    </div>
+  </footer>
+
+<script>
+  const btn=document.getElementById('readMore');
+  const story=document.getElementById('story');
+  btn.addEventListener('click',()=>{
+    const open=story.classList.toggle('open');
+    btn.querySelector('.arrow').textContent=open?'↑':'→';
+    btn.childNodes[0].nodeValue=open?'Mostra meno ':'Leggi di più ';
+    if(open){setTimeout(()=>story.scrollIntoView({behavior:'smooth',block:'start'}),120);}
+  });
+</script>
+
+<!-- PRIVACY MODAL -->
+<div id="privacy-modal" class="modal" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('privacy-modal').style.display='none'">✕</button>
+    <h2>Privacy &amp; Cookie Policy</h2>
+    <p>Questa pagina descrive le modalità di gestione del sito web <strong>chefveronicaforchielli.it</strong> in riferimento al trattamento dei dati personali degli utenti che lo consultano, in conformità al Regolamento UE 2016/679 (GDPR) e al D.Lgs. 196/2003.</p>
+
+    <h3>Titolare del trattamento</h3>
+    <p>Veronica Forchielli<br>Email: vero.forchielli@gmail.com</p>
+
+    <h3>Dati raccolti</h3>
+    <p>Il sito non raccoglie direttamente dati personali tramite form o registrazioni. L'unica interazione possibile è il contatto via email attraverso il pulsante "Contattami": i dati eventualmente trasmessi (nome, indirizzo email, contenuto del messaggio) sono gestiti esclusivamente dal servizio di posta elettronica utilizzato dall'utente e dal titolare, e non vengono conservati sul sito.</p>
+
+    <h3>Cookie</h3>
+    <p>Questo sito <strong>non utilizza cookie di profilazione</strong> né cookie di terze parti a scopo di tracciamento o marketing. Non vengono installati cookie che richiedono il consenso dell'utente ai sensi della normativa vigente.</p>
+    <p>Il sito potrebbe utilizzare esclusivamente cookie tecnici di sessione, strettamente necessari al funzionamento della pagina, per i quali non è richiesto il consenso.</p>
+
+    <h3>Dati di navigazione</h3>
+    <p>I sistemi informatici e le procedure software preposte al funzionamento di questo sito acquisiscono, nel corso del loro normale esercizio, alcuni dati la cui trasmissione è implicita nell'uso dei protocolli di comunicazione di Internet (es. indirizzi IP, tipo di browser). Questi dati sono utilizzati al solo fine di ricavare informazioni statistiche anonime sull'uso del sito.</p>
+
+    <h3>Hosting</h3>
+    <p>Il sito è ospitato su <strong>GitHub Pages</strong> (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). GitHub potrebbe raccogliere dati tecnici di navigazione secondo la propria <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener" style="color:#4d5440">Privacy Policy</a>.</p>
+
+    <h3>Diritti dell'utente</h3>
+    <p>In qualità di interessato, l'utente ha il diritto di accedere ai propri dati, chiederne la rettifica o la cancellazione, opporsi al trattamento e proporre reclamo all'Autorità Garante per la protezione dei dati personali (www.garanteprivacy.it). Per esercitare tali diritti: <strong>vero.forchielli@gmail.com</strong></p>
+
+    <h3>Aggiornamenti</h3>
+    <p>La presente policy può essere aggiornata in qualsiasi momento. La data dell'ultimo aggiornamento è: <strong>giugno 2026</strong>.</p>
+  </div>
+</div>
+
+</body>
+</html>
