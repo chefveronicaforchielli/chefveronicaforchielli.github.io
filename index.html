@@ -407,5 +407,326 @@
   </div>
 </div>
 
+<!--
+  POP-UP EVENTO AMALGA — snippet da incollare in chefveronicaforchielli.it
+  =========================================================================
+  Come integrarlo:
+  1. Incolla questo intero blocco (style + html + script) subito prima di </body>,
+     su qualunque pagina in cui vuoi che compaia l'avviso.
+  2. Se il sito carica già i font Fraunces e Jost altrove, puoi eliminare il
+     tag <link> dei Google Fonts qui sotto per evitare un doppio caricamento.
+  3. Il pulsante principale punta già a "documenti/AMALGA-Presentazione-Evento.pdf":
+     basta caricare il PDF in una cartella "documenti" nella root del sito (repo
+     GitHub Pages) con questo nome esatto. Se preferisci un'altra cartella o un
+     link esterno, modifica quell'unico percorso nel pulsante più sotto.
+     Il pulsante "Scrivi per prenotare" è già impostato su chef@chefveronicaforchielli.it.
+  4. Il pop-up compare una volta, 2,5s dopo il caricamento della pagina, e si
+     chiude con la X, cliccando fuori o con Esc. Non usa localStorage (per
+     restare compatibile con l'anteprima), quindi ricompare a ogni refresh:
+     se sul sito pubblicato vuoi che compaia una sola volta per visitatore,
+     aggiungi tu poche righe di localStorage nello script in fondo — è
+     indicato dove, con un commento.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  #amalga-popup-root {
+    --sage: #8a9a78;
+    --sage-deep: #5f6f52;
+    --cream: #faf6ec;
+    --dark: #2c3324;
+    --ink: #2b2b22;
+    --ink-soft: #6b6b5a;
+    --radius: 20px;
+    font-family: 'Jost', sans-serif;
+  }
+
+  #amalga-popup-root * { box-sizing: border-box; }
+
+  #amalga-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(44, 51, 36, 0.45);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease;
+    z-index: 9998;
+  }
+  #amalga-overlay.is-open { opacity: 1; visibility: visible; }
+
+  #amalga-card {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 100%);
+    width: 100%;
+    max-width: 420px;
+    max-height: 88vh;
+    overflow-y: auto;
+    background: var(--cream);
+    border-radius: var(--radius) var(--radius) 0 0;
+    box-shadow: 0 -10px 40px rgba(44, 51, 36, 0.25);
+    z-index: 9999;
+    transition: transform 0.45s cubic-bezier(.2,.9,.25,1);
+  }
+  #amalga-overlay.is-open #amalga-card { transform: translate(-50%, 0); }
+
+  @media (min-width: 640px) {
+    #amalga-card {
+      bottom: 50%;
+      transform: translate(-50%, 60%);
+      opacity: 0;
+      border-radius: var(--radius);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+    #amalga-overlay.is-open #amalga-card {
+      transform: translate(-50%, 50%);
+      opacity: 1;
+    }
+  }
+
+  #amalga-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(44, 51, 36, 0.08);
+    color: var(--dark);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  #amalga-close:hover { background: rgba(44, 51, 36, 0.16); }
+
+  .amalga-hero {
+    position: relative;
+    padding: 30px 28px 18px;
+    overflow: hidden;
+  }
+  .amalga-hero svg { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: auto; opacity: 0.9; }
+
+  .amalga-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+
+  .amalga-title {
+    font-family: 'Fraunces', serif;
+    font-size: 30px;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0 0 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .amalga-meta {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--sage-deep);
+    margin: 0 0 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .amalga-teaser {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .amalga-body { padding: 0 28px 28px; }
+
+  #amalga-more {
+    display: none;
+    padding-top: 4px;
+  }
+  #amalga-more.is-open { display: block; }
+
+  .amalga-program {
+    list-style: none;
+    margin: 18px 0;
+    padding: 0;
+    border-top: 1px solid rgba(44, 51, 36, 0.12);
+  }
+  .amalga-program li {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(44, 51, 36, 0.12);
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .amalga-program time {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    color: var(--sage-deep);
+    flex: 0 0 68px;
+  }
+
+  .amalga-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 18px 0 22px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .amalga-price-row strong {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .amalga-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  .amalga-btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    padding: 13px 20px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: opacity 0.2s ease, background 0.2s ease;
+  }
+  .amalga-btn-primary { background: var(--dark); color: var(--cream); }
+  .amalga-btn-primary:hover { opacity: 0.88; }
+  .amalga-btn-ghost { background: transparent; color: var(--ink); border-color: rgba(44, 51, 36, 0.25); }
+  .amalga-btn-ghost:hover { background: rgba(44, 51, 36, 0.06); }
+
+  #amalga-toggle {
+    background: none;
+    border: none;
+    padding: 12px 0 0;
+    margin: 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--sage-deep);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+  }
+</style>
+
+<div id="amalga-popup-root">
+  <div id="amalga-overlay">
+    <div id="amalga-card" role="dialog" aria-modal="true" aria-labelledby="amalga-title">
+      <button id="amalga-close" aria-label="Chiudi">&times;</button>
+
+      <div class="amalga-hero">
+        <p class="amalga-eyebrow">Evento speciale · 22 agosto 2026</p>
+        <h2 id="amalga-title" class="amalga-title">Un giorno in malga</h2>
+        <p class="amalga-meta">AMALGA · Malga Bordolona · Trentino</p>
+        <p class="amalga-teaser">Una giornata intera tra i pascoli, il caseificio e la cucina di montagna: erbe selvatiche, formaggi home made, brunch sul prato e cena al tramonto.</p>
+
+        <svg viewBox="0 0 400 40" preserveAspectRatio="none">
+          <path d="M0,40 L0,26 L60,10 L110,28 L170,4 L230,24 L290,12 L340,30 L400,18 L400,40 Z" fill="#8a9a78" opacity="0.25"/>
+        </svg>
+
+        <button id="amalga-toggle" aria-expanded="false">Leggi di più ↓</button>
+      </div>
+
+      <div class="amalga-body">
+        <div id="amalga-more">
+          <ul class="amalga-program">
+            <li><time>7:00</time><span>Colazione a buffet a Malga Bordolona Bassa</span></li>
+            <li><time>9:30</time><span>Raccolta di erbe selvatiche con Ferruccio Valentini</span></li>
+            <li><time>12:30</time><span>Brunch sul prato, vista sulle Dolomiti</span></li>
+            <li><time>15:00</time><span>Visita al caseificio con il Casaro</span></li>
+            <li><time>19:30</time><span>Cena e degustazione di formaggi</span></li>
+          </ul>
+
+          <div class="amalga-price-row">
+            <span>Solo giornata, a partire da</span>
+            <strong>150 €</strong>
+          </div>
+          <p style="font-size:12px;color:var(--ink-soft);margin:-14px 0 4px;">Massimo 40 partecipanti · disponibile anche il pacchetto con pernottamento</p>
+        </div>
+
+        <div class="amalga-actions">
+          <a class="amalga-btn amalga-btn-primary" href="documenti/AMALGA-Presentazione-Evento.pdf" target="_blank" rel="noopener">Guarda la presentazione completa</a>
+          <a class="amalga-btn amalga-btn-ghost" href="mailto:chef@chefveronicaforchielli.it">Scrivi per prenotare</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var overlay = document.getElementById('amalga-overlay');
+    var closeBtn = document.getElementById('amalga-close');
+    var toggleBtn = document.getElementById('amalga-toggle');
+    var more = document.getElementById('amalga-more');
+
+    function openPopup() { overlay.classList.add('is-open'); }
+    function closePopup() { overlay.classList.remove('is-open'); }
+
+    // Il pop-up smette di comparire dopo le 23:59 del 22 agosto 2026 (fine
+    // giornata evento, ora italiana). Se intendevi le 11:59 del mattino,
+    // cambia l'orario qui sotto in '2026-08-22T11:59:59+02:00'.
+    var EVENT_CUTOFF = new Date('2026-08-22T23:59:59+02:00');
+
+    if (new Date() <= EVENT_CUTOFF) {
+      setTimeout(openPopup, 2500);
+    }
+
+    closeBtn.addEventListener('click', closePopup);
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closePopup();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closePopup();
+    });
+
+    toggleBtn.addEventListener('click', function () {
+      var isOpen = more.classList.toggle('is-open');
+      toggleBtn.textContent = isOpen ? 'Mostra meno ↑' : 'Leggi di più ↓';
+      toggleBtn.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Per mostrare il pop-up una sola volta per visitatore, quando il sito
+    // sarà online, sostituisci il blocco "if (new Date() <= EVENT_CUTOFF)"
+    // qui sopra con:
+    //
+    // if (new Date() <= EVENT_CUTOFF && !localStorage.getItem('amalga-popup-seen')) {
+    //   setTimeout(openPopup, 2500);
+    //   localStorage.setItem('amalga-popup-seen', '1');
+    // }
+  })();
+</script>
+
 </body>
 </html>
