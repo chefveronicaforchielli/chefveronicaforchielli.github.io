@@ -413,8 +413,12 @@
   Come integrarlo:
   1. Incolla questo intero blocco (style + html + script) subito prima di </body>,
      su qualunque pagina in cui vuoi che compaia l'avviso.
-  2. Se il sito carica già i font Fraunces e Jost altrove, puoi eliminare il
-     tag <link> dei Google Fonts qui sotto per evitare un doppio caricamento.
+  2. I font Fraunces e Jost sono caricati in locale (nessuna chiamata a
+     Google Fonts) dai file in una cartella "fonts/" nella root del sito:
+     Fraunces-Regular.woff2, Fraunces-Medium.woff2, Fraunces-Italic.woff2,
+     Jost-Light.woff2, Jost-Regular.woff2, Jost-Medium.woff2. Se il sito
+     carica già questi font altrove con lo stesso nome, puoi eliminare le
+     regole @font-face qui sotto per evitare un doppio caricamento.
   3. Il pulsante principale punta già a "documenti/AMALGA-Presentazione-Evento.pdf":
      basta caricare il PDF in una cartella "documenti" nella root del sito (repo
      GitHub Pages) con questo nome esatto. Se preferisci un'altra cartella o un
@@ -428,11 +432,50 @@
      indicato dove, con un commento.
 -->
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-
 <style>
+  @font-face {
+    font-family: 'Fraunces';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/Fraunces-Regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Fraunces';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('fonts/Fraunces-Medium.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Fraunces';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/Fraunces-Italic.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('fonts/Jost-Light.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/Jost-Regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('fonts/Jost-Medium.woff2') format('woff2');
+  }
+
   #amalga-popup-root {
     --sage: #8a9a78;
     --sage-deep: #5f6f52;
