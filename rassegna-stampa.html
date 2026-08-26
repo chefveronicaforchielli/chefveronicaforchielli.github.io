@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Rassegna stampa di Veronica Forchielli, Chef di Cucina d'Alta Montagna. Articoli, interviste e menzioni apparsi su testate e riviste.">
+<meta name="keywords" content="Veronica Forchielli stampa, rassegna stampa chef, articoli Veronica Forchielli">
+<meta property="og:title" content="Rassegna stampa | Veronica Forchielli">
+<meta property="og:description" content="Rassegna stampa: articoli, interviste e menzioni su Veronica Forchielli, Chef di Cucina d'Alta Montagna.">
+<meta property="og:url" content="https://chefveronicaforchielli.it/rassegna-stampa.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://res.cloudinary.com/dumit3klq/image/upload/16_etzy46.jpg">
+<title>Rassegna stampa | Veronica Forchielli</title>
+<style>
+  :root{
+    --sage:#a8ab8a;
+    --sage-deep:#9a9d7c;
+    --cream:#f1f0e3;
+    --ink:#2b2c22;
+    --ink-soft:#494a3c;
+    --line:rgba(43,44,34,.2);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+    background:var(--sage);
+    color:var(--ink);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .display{font-family:Georgia,'Times New Roman',serif;}
+  .italic{font-style:italic;}
+
+  /* ---------- HEADER ---------- */
+  .page-header{padding:28px clamp(24px,6vw,90px)}
+  .back-link{color:var(--ink-soft);text-decoration:none;font-size:.85rem;letter-spacing:.06em;transition:color .25s}
+  .back-link:hover{color:var(--ink)}
+
+  .press-hero{padding:10px clamp(24px,6vw,90px) clamp(50px,7vw,80px)}
+  .eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+  .press-hero h1{font-size:clamp(2.4rem,6vw,4.4rem);line-height:1;font-weight:300;letter-spacing:-.01em;margin:16px 0 22px}
+  .press-hero h1 .italic{font-weight:400}
+  .press-tag{font-size:clamp(1rem,1.5vw,1.15rem);color:var(--ink-soft);max-width:56ch}
+
+  /* ---------- PRESS LIST ---------- */
+  .press-list{background:var(--cream)}
+  .press-list-inner{
+    max-width:900px;margin:0 auto;
+    padding:clamp(50px,8vw,90px) clamp(24px,6vw,90px) clamp(90px,10vw,140px);
+  }
+  .press-cards{display:flex;flex-direction:column}
+  .press-card{padding:34px 0;border-bottom:1px solid var(--line)}
+  .press-card:first-child{padding-top:0}
+  .press-outlet{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+  .press-title{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.35;margin-bottom:12px}
+  .press-title a{
+    color:var(--ink);text-decoration:none;
+    background-image:linear-gradient(var(--ink),var(--ink));
+    background-position:0 100%;background-repeat:no-repeat;background-size:0% 1px;
+    transition:background-size .3s;
+  }
+  .press-title a:hover{background-size:100% 1px}
+  .press-meta{font-size:.9rem;color:var(--ink-soft);margin-bottom:16px}
+  .press-link{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+  .press-link .arrow{transition:transform .3s}
+  .press-link:hover .arrow{transform:translateX(4px)}
+  .press-empty{color:var(--ink-soft);font-style:italic;font-family:Georgia,'Times New Roman',serif}
+
+  /* ---------- CONTACT (identica a index.html) ---------- */
+  .contact{
+    position:relative;
+    background:var(--ink);color:var(--cream);
+    padding:clamp(80px,12vw,150px) clamp(24px,6vw,90px);
+    text-align:center;overflow:hidden;
+  }
+  .contact::before{
+    content:"";position:absolute;inset:0;
+    background:url('https://res.cloudinary.com/dumit3klq/image/upload/19_kgfnns.jpg') center/cover no-repeat;
+    opacity:.5;
+  }
+  .contact::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(26,26,22,.55),rgba(26,26,22,.8));
+  }
+  .contact > *{position:relative;z-index:1}
+  .contact h2{font-family:Georgia,'Times New Roman',serif;font-weight:300;font-size:clamp(2rem,5vw,3.4rem);margin-bottom:30px}
+  .contact h2 .italic{font-weight:400}
+  .contact a.mail{
+    color:var(--cream);font-family:Georgia,'Times New Roman',serif;font-style:italic;
+    font-size:clamp(1.2rem,2.5vw,1.7rem);text-decoration:none;
+    border-bottom:1px solid rgba(244,243,234,.4);padding-bottom:4px;
+    transition:border-color .3s;
+  }
+  .contact a.mail:hover{border-color:var(--cream)}
+  .contact .phone{margin-top:20px;color:rgba(244,243,234,.7);letter-spacing:.1em}
+  .press-nav-link{display:block;margin-top:26px;color:var(--cream);opacity:.85;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:opacity .3s}
+  .press-nav-link:hover{opacity:1}
+  .contact .socials{margin-top:40px;display:flex;gap:28px;justify-content:center;align-items:center}
+  .contact .socials a{color:rgba(244,243,234,.75);text-decoration:none;transition:opacity .3s}
+  .contact .socials a:hover{opacity:1}
+  .contact .socials a svg{width:22px;height:22px;fill:rgba(244,243,234,.75);transition:fill .3s;display:block}
+  .contact .socials a:hover svg{fill:var(--cream)}
+  .privacy-link{display:block;color:rgba(244,243,234,.5);font-size:.75rem;letter-spacing:.1em;text-decoration:none;margin-top:16px;margin-bottom:20px;transition:color .3s}
+  .privacy-link:hover{color:rgba(244,243,234,.8)}
+
+  @media(max-width:560px){
+    .press-card{padding:28px 0}
+  }
+</style>
+</head>
+<body>
+
+  <header class="page-header">
+    <a href="index.html" class="back-link">← Veronica Forchielli</a>
+  </header>
+
+  <main class="press-hero">
+    <p class="eyebrow">Parlano di me</p>
+    <h1 class="display">Rassegna <span class="italic">stampa</span></h1>
+    <p class="press-tag">Articoli, interviste e menzioni apparsi su testate e riviste.</p>
+  </main>
+
+  <section class="press-list">
+    <div class="press-list-inner">
+      <div class="press-cards">
+
+        <!--
+          NUOVA VOCE: per aggiungere un articolo, duplica l'intero blocco
+          <article class="press-card">...</article> qui sotto e compila
+          i cinque campi (testata, titolo, autore, data, link).
+        -->
+        <article class="press-card">
+          <p class="press-outlet">Cibovagare</p>
+          <h2 class="press-title"><a href="https://www.cibovagare.it/cacio/amalga-la-malga-come-patrimonio-vivo-tra-latte-crudo-e-pascoli-del-trentino-2-4395.html" target="_blank" rel="noopener">Amalga, la malga come patrimonio vivo tra latte crudo e pascoli del Trentino</a></h2>
+          <p class="press-meta">di Marco Colognese · 25 agosto 2026</p>
+          <a class="press-link" href="https://www.cibovagare.it/cacio/amalga-la-malga-come-patrimonio-vivo-tra-latte-crudo-e-pascoli-del-trentino-2-4395.html" target="_blank" rel="noopener">Leggi l'articolo <span class="arrow">→</span></a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <footer class="contact">
+    <h2 class="display">Parliamo di <span class="italic">cucina</span></h2>
+    <a class="mail" href="mailto:chef@chefveronicaforchielli.it">chef@chefveronicaforchielli.it</a>
+    <div class="phone">+39 334 161 1421</div>
+    <a href="index.html" class="press-nav-link">Torna alla home</a>
+    <a href="#privacy" class="privacy-link" onclick="document.getElementById('privacy-modal').style.display='flex';return false;">Privacy &amp; Cookie Policy</a>
+    <div class="socials">
+      <a href="https://www.facebook.com/share/1CBhmJ9u5X/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.313 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
+      <a href="https://www.instagram.com/veronicaforchielli" target="_blank" rel="noopener" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+      <a href="https://www.linkedin.com/in/veronica-forchielli-77351719a" target="_blank" rel="noopener" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+    </div>
+  </footer>
+
+  <!-- PRIVACY MODAL -->
+  <div id="privacy-modal" class="modal" onclick="if(event.target===this)this.style.display='none'">
+    <div class="modal-box">
+      <button class="modal-close" onclick="document.getElementById('privacy-modal').style.display='none'">✕</button>
+      <h2>Privacy &amp; Cookie Policy</h2>
+      <p>Questa pagina descrive le modalità di gestione del sito web <strong>chefveronicaforchielli.it</strong> in riferimento al trattamento dei dati personali degli utenti che lo consultano, in conformità al Regolamento UE 2016/679 (GDPR) e al D.Lgs. 196/2003.</p>
+
+      <h3>Titolare del trattamento</h3>
+      <p>Veronica Forchielli<br>Email: chef@chefveronicaforchielli.it</p>
+
+      <h3>Dati raccolti</h3>
+      <p>Il sito non raccoglie direttamente dati personali tramite form o registrazioni. L'unica interazione possibile è il contatto via email attraverso il pulsante "Contattami": i dati eventualmente trasmessi (nome, indirizzo email, contenuto del messaggio) sono gestiti esclusivamente dal servizio di posta elettronica utilizzato dall'utente e dal titolare, e non vengono conservati sul sito.</p>
+
+      <h3>Cookie</h3>
+      <p>Questo sito <strong>non utilizza cookie di profilazione</strong> né cookie di terze parti a scopo di tracciamento o marketing. Non vengono installati cookie che richiedono il consenso dell'utente ai sensi della normativa vigente.</p>
+      <p>Il sito potrebbe utilizzare esclusivamente cookie tecnici di sessione, strettamente necessari al funzionamento della pagina, per i quali non è richiesto il consenso.</p>
+
+      <h3>Dati di navigazione</h3>
+      <p>I sistemi informatici e le procedure software preposte al funzionamento di questo sito acquisiscono, nel corso del loro normale esercizio, alcuni dati la cui trasmissione è implicita nell'uso dei protocolli di comunicazione di Internet (es. indirizzi IP, tipo di browser). Questi dati sono utilizzati al solo fine di ricavare informazioni statistiche anonime sull'uso del sito.</p>
+
+      <h3>Hosting</h3>
+      <p>Il sito è ospitato su <strong>GitHub Pages</strong> (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). GitHub potrebbe raccogliere dati tecnici di navigazione secondo la propria <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener" style="color:#4d5440">Privacy Policy</a>.</p>
+
+      <h3>Diritti dell'utente</h3>
+      <p>In qualità di interessato, l'utente ha il diritto di accedere ai propri dati, chiederne la rettifica o la cancellazione, opporsi al trattamento e proporre reclamo all'Autorità Garante per la protezione dei dati personali (www.garanteprivacy.it). Per esercitare tali diritti: <strong>chef@chefveronicaforchielli.it</strong></p>
+
+      <h3>Aggiornamenti</h3>
+      <p>La presente policy può essere aggiornata in qualsiasi momento. La data dell'ultimo aggiornamento è: <strong>giugno 2026</strong>.</p>
+    </div>
+  </div>
+
+<style>
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center;padding:20px}
+  .modal-box{background:#f1f0e3;color:#2b2c22;max-width:680px;width:100%;max-height:85vh;overflow-y:auto;border-radius:6px;padding:clamp(30px,5vw,50px);position:relative}
+  .modal-box h2{font-family:Georgia,serif;font-weight:400;font-size:24px;margin-bottom:20px}
+  .modal-box h3{font-family:Georgia,serif;font-weight:400;font-size:17px;margin:20px 0 8px}
+  .modal-box p{font-size:13.5px;line-height:1.75;color:#494a3c;margin-bottom:12px}
+  .modal-close{position:absolute;top:16px;right:20px;font-size:22px;cursor:pointer;color:#6a6b56;background:none;border:none;line-height:1}
+  .modal-close:hover{color:#2b2c22}
+</style>
+
+</body>
+</html>
