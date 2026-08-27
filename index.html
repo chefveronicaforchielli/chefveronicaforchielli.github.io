@@ -837,5 +837,126 @@
   })();
 </script>
 
+<style>
+  #racconto-bar-root {
+    --sage: #8a9a78;
+    --sage-deep: #5f6f52;
+    --cream: #faf6ec;
+    --dark: #2c3324;
+    --ink: #2b2b22;
+    font-family: 'Jost', sans-serif;
+  }
+
+  #racconto-bar-root * { box-sizing: border-box; }
+
+  #racconto-bar {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translate(-50%, 140%);
+    width: calc(100% - 32px);
+    max-width: 480px;
+    background: var(--dark);
+    color: var(--cream);
+    border-radius: 999px;
+    box-shadow: 0 8px 30px rgba(44, 51, 36, 0.35);
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px 10px 20px;
+    transition: transform 0.5s cubic-bezier(.2,.9,.25,1);
+  }
+  #racconto-bar.is-open { transform: translate(-50%, 0); }
+
+  #racconto-bar-text {
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.3;
+  }
+  #racconto-bar-text strong {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  #racconto-bar-link {
+    flex-shrink: 0;
+    text-decoration: none;
+    background: var(--sage);
+    color: var(--dark);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 9px 16px;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+  }
+  #racconto-bar-link:hover { opacity: 0.88; }
+
+  #racconto-bar-close {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(250, 246, 236, 0.14);
+    color: var(--cream);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #racconto-bar-close:hover { background: rgba(250, 246, 236, 0.26); }
+
+  @media (max-width: 480px) {
+    #racconto-bar { flex-wrap: wrap; border-radius: 20px; padding: 14px 16px; bottom: 44px; }
+    #racconto-bar-link { order: 3; width: 100%; text-align: center; margin-top: 4px; }
+  }
+</style>
+
+<div id="racconto-bar-root">
+  <div id="racconto-bar">
+    <span id="racconto-bar-text">📖 Nuovo: <strong>Un giorno in malga</strong> — il racconto del 22 agosto.</span>
+    <a id="racconto-bar-link" href="un-giorno-in-malga.html">Leggi</a>
+    <button id="racconto-bar-close" aria-label="Chiudi">&times;</button>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var bar = document.getElementById('racconto-bar');
+    var closeBtn = document.getElementById('racconto-bar-close');
+
+    function openBar() { bar.classList.add('is-open'); }
+    function closeBar() { bar.classList.remove('is-open'); }
+
+    // Smette di comparire dopo le 23:59 del 30 settembre 2026 (ora italiana).
+    var BAR_CUTOFF = new Date('2026-09-30T23:59:59+02:00');
+
+    if (new Date() <= BAR_CUTOFF) {
+      setTimeout(openBar, 2500);
+    }
+
+    closeBtn.addEventListener('click', closeBar);
+
+    document.addEventListener('click', function (e) {
+      if (bar.classList.contains('is-open') && !bar.contains(e.target)) {
+        closeBar();
+      }
+    });
+
+    // Per mostrarla una sola volta per visitatore invece che a ogni refresh,
+    // sostituisci il blocco "if (new Date() <= BAR_CUTOFF)" qui sopra con:
+    //
+    // if (new Date() <= BAR_CUTOFF && !localStorage.getItem('racconto-bar-seen')) {
+    //   setTimeout(openBar, 2500);
+    //   localStorage.setItem('racconto-bar-seen', '1');
+    // }
+  })();
+</script>
+
 </body>
 </html>
