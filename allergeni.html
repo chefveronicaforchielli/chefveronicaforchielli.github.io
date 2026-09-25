@@ -178,6 +178,18 @@
     color: var(--ink-soft);
     text-align: center;
   }
+  .home-link {
+    display: inline-block;
+    margin-bottom: 16px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--sage-deep);
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+  .home-link:hover { opacity: 0.75; }
 </style>
 </head>
 <body>
@@ -214,7 +226,10 @@
       </tbody>
     </table>
 
-    <footer>VERONICA FORCHIELLI · CHEF DI CUCINA</footer>
+    <footer>
+      <a class="home-link" href="index.html">← Torna alla home</a>
+      <div>VERONICA FORCHIELLI · CHEF DI CUCINA</div>
+    </footer>
   </div>
 </body>
 </html>
