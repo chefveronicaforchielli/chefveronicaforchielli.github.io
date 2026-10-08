@@ -76,14 +76,10 @@
     font-weight:300;
     line-height:1.7;
     -webkit-font-smoothing:antialiased;
+    padding-top:72px;
   }
   .display{font-family:'Fraunces',Georgia,serif;}
   .italic{font-style:italic;}
-
-  /* ---------- HEADER ---------- */
-  .page-header{padding:28px clamp(24px,6vw,90px)}
-  .back-link{color:var(--stone);text-decoration:none;font-size:.85rem;letter-spacing:.06em;transition:color .25s}
-  .back-link:hover{color:var(--forest)}
 
   /* ---------- HERO BANNER ---------- */
   .hero-banner-wrap{position:relative}
@@ -170,12 +166,245 @@
   .modal-close{position:absolute;top:16px;right:20px;font-size:22px;cursor:pointer;color:#6a6b56;background:none;border:none;line-height:1}
   .modal-close:hover{color:#2b2c22}
 </style>
-</head>
-<body>
+<style id="site-header-styles">
+  @font-face{font-family:'Fraunces';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/Fraunces-Regular.woff2') format('woff2');}
+  @font-face{font-family:'Fraunces';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/Fraunces-Medium.woff2') format('woff2');}
+  @font-face{font-family:'Fraunces';font-style:italic;font-weight:400;font-display:swap;src:url('fonts/Fraunces-Italic.woff2') format('woff2');}
+  @font-face{font-family:'Jost';font-style:normal;font-weight:300;font-display:swap;src:url('fonts/Jost-Light.woff2') format('woff2');}
+  @font-face{font-family:'Jost';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/Jost-Regular.woff2') format('woff2');}
+  @font-face{font-family:'Jost';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/Jost-Medium.woff2') format('woff2');}
+  .site-header{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    font-family:'Jost',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  }
+  .site-header::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background:linear-gradient(180deg,rgba(20,22,16,.5),rgba(20,22,16,0));
+    opacity:1;transition:opacity .35s ease;pointer-events:none;
+  }
+  .site-header.is-solid::before{opacity:0}
+  .site-header-inner{
+    position:relative;z-index:1;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+    min-height:72px;
+    padding:14px clamp(24px,6vw,90px);
+    background:transparent;
+    border-bottom:1px solid transparent;
+    transition:background .35s ease,border-color .35s ease;
+  }
+  .site-header.is-solid .site-header-inner{
+    background:#f1f0e3;
+    border-bottom-color:rgba(43,44,34,.14);
+  }
+  .site-brand{
+    font-family:'Fraunces','Georgia','Times New Roman',serif;font-style:italic;font-weight:500;
+    font-size:clamp(1.05rem,2vw,1.3rem);
+    color:#f1f0e3;text-shadow:0 1px 5px rgba(0,0,0,.55);
+    text-decoration:none;white-space:nowrap;
+    transition:color .35s ease,text-shadow .35s ease;
+  }
+  .site-header.is-solid .site-brand{color:#2b2c22;text-shadow:none}
+  .site-brand.is-current{text-decoration:underline;text-underline-offset:4px}
 
-  <header class="page-header">
-    <a href="index.html" class="back-link">← Veronica Forchielli</a>
+  .site-nav{display:flex}
+  .site-nav > ul{display:flex;align-items:center;gap:clamp(20px,3vw,40px);list-style:none;margin:0;padding:0}
+  .site-nav a,.site-nav-toggle{
+    font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;
+    color:#f1f0e3;text-shadow:0 1px 5px rgba(0,0,0,.55);
+    text-decoration:none;background:none;border:none;cursor:pointer;
+    font-family:inherit;padding:8px 0;display:inline-flex;align-items:center;gap:6px;
+    transition:color .35s ease,text-shadow .35s ease,opacity .25s ease;
+  }
+  .site-header.is-solid .site-nav a,.site-header.is-solid .site-nav-toggle{color:#2b2c22;text-shadow:none}
+  .site-nav a:hover,.site-nav-toggle:hover{opacity:.72}
+  .site-nav a.is-current,.site-nav-toggle.is-current{text-decoration:underline;text-underline-offset:4px}
+  .site-caret{font-size:.65em;transition:transform .25s ease}
+  .site-nav-toggle[aria-expanded="true"] .site-caret{transform:rotate(180deg)}
+
+  .site-has-submenu{position:relative}
+  .site-submenu{
+    list-style:none;margin:0;padding:10px;position:absolute;top:calc(100% + 10px);left:50%;
+    transform:translateX(-50%);
+    background:#f1f0e3;border-radius:10px;min-width:200px;
+    box-shadow:0 14px 34px rgba(43,44,34,.22);
+    opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .22s ease,visibility .22s ease;
+  }
+  .site-has-submenu:hover .site-submenu,
+  .site-has-submenu:focus-within .site-submenu,
+  .site-submenu.is-open{
+    opacity:1;visibility:visible;pointer-events:auto;
+  }
+  .site-submenu a{
+    display:block;color:#2b2c22;text-shadow:none;font-size:.78rem;
+    letter-spacing:.04em;text-transform:none;padding:10px 12px;border-radius:6px;
+    white-space:nowrap;
+  }
+  .site-submenu a:hover{background:rgba(43,44,34,.06);opacity:1}
+  .site-submenu-mobile{display:none}
+
+  .site-menu-btn{
+    display:none;background:none;border:none;cursor:pointer;padding:8px;
+    color:#f1f0e3;transition:color .35s ease;
+  }
+  .site-header.is-solid .site-menu-btn{color:#2b2c22}
+  .site-menu-bars{display:flex;flex-direction:column;gap:5px;width:24px}
+  .site-menu-bars span{display:block;height:2px;width:100%;background:currentColor;border-radius:2px}
+
+  .site-mobile-panel{
+    position:fixed;top:72px;left:0;right:0;bottom:0;
+    background:#f1f0e3;z-index:999;
+    padding:clamp(24px,6vh,40px) clamp(24px,8vw,60px) 40px;
+    transform:translateY(-100%);opacity:0;
+    transition:transform .35s cubic-bezier(.2,.8,.25,1),opacity .3s ease;
+    overflow-y:auto;
+  }
+  .site-mobile-panel.is-open{transform:translateY(0);opacity:1}
+  .site-mobile-panel nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+  .site-mobile-panel nav a,.site-mobile-panel nav .site-nav-toggle{
+    font-size:1.5rem;font-family:'Fraunces',Georgia,serif;font-weight:400;
+    color:#2b2c22;text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(43,44,34,.12);
+    display:flex;align-items:center;justify-content:space-between;width:100%;
+    background:none;border-left:none;border-right:none;border-top:none;text-align:left;cursor:pointer;
+  }
+  .site-mobile-panel .site-submenu-mobile{
+    display:none;position:static;transform:none;list-style:none;margin:0;padding:0 0 6px 18px;
+    background:transparent;box-shadow:none;opacity:1;visibility:visible;pointer-events:auto;
+  }
+  .site-mobile-panel .site-submenu-mobile.is-open{display:block}
+  .site-mobile-panel .site-submenu-mobile a{
+    font-size:1.05rem;border-bottom:none;padding:10px 0;color:#494a3c;
+  }
+  .site-mobile-panel nav a.is-current,
+  .site-mobile-panel nav .site-nav-toggle.is-current{color:#5f6f52}
+
+  body.site-panel-open{overflow:hidden}
+
+  @media(max-width:720px){
+    .site-nav{display:none}
+    .site-menu-btn{display:inline-flex}
+  }
+</style>
+</head>
+<body data-page="malga">
+
+  <header class="site-header" id="siteHeader">
+    <div class="site-header-inner">
+      <a href="index.html" class="site-brand" data-page-id="home">Veronica Forchielli</a>
+
+      <nav class="site-nav" aria-label="Navigazione principale">
+        <ul>
+          <li><a href="index.html#story">Chi sono</a></li>
+          <li class="site-has-submenu">
+            <button type="button" class="site-nav-toggle" id="racontiToggle" aria-expanded="false" aria-controls="racontiSubmenu" data-menu="racconti">Racconti <span class="site-caret" aria-hidden="true">▾</span></button>
+            <ul class="site-submenu" id="racontiSubmenu">
+              <li><a href="un-giorno-in-malga.html" data-page-id="malga">Un giorno in malga</a></li>
+            </ul>
+          </li>
+          <li><a href="rassegna-stampa.html" data-page-id="rassegna">Rassegna stampa</a></li>
+          <li><a href="index.html#contatto">Contatti</a></li>
+        </ul>
+      </nav>
+
+      <button type="button" class="site-menu-btn" id="siteMenuBtn" aria-label="Apri il menu" aria-expanded="false" aria-controls="siteMobilePanel">
+        <span class="site-menu-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+
+    <div class="site-mobile-panel" id="siteMobilePanel">
+      <nav aria-label="Navigazione mobile">
+        <ul>
+          <li><a href="index.html#story">Chi sono</a></li>
+          <li class="site-has-submenu">
+            <button type="button" class="site-nav-toggle site-nav-toggle-mobile" id="racontiToggleMobile" aria-expanded="false" aria-controls="racontiSubmenuMobile" data-menu="racconti">Racconti <span class="site-caret" aria-hidden="true">▾</span></button>
+            <ul class="site-submenu site-submenu-mobile" id="racontiSubmenuMobile">
+              <li><a href="un-giorno-in-malga.html" data-page-id="malga">Un giorno in malga</a></li>
+            </ul>
+          </li>
+          <li><a href="rassegna-stampa.html" data-page-id="rassegna">Rassegna stampa</a></li>
+          <li><a href="index.html#contatto">Contatti</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
+
+  <script>
+  (function(){
+    var header=document.getElementById('siteHeader');
+
+    function syncScroll(){
+      var hasHero=!!document.querySelector('.hero-photo-wrap');
+      if(!hasHero){header.classList.add('is-solid');return;}
+      if(window.scrollY>60){header.classList.add('is-solid');}
+      else{header.classList.remove('is-solid');}
+    }
+    if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',syncScroll);}else{syncScroll();}
+    window.addEventListener('scroll',syncScroll,{passive:true});
+
+    var currentPage=document.body.getAttribute('data-page');
+    if(currentPage){
+      document.querySelectorAll('[data-page-id="'+currentPage+'"]').forEach(function(el){
+        el.classList.add('is-current');
+        el.setAttribute('aria-current','page');
+      });
+      if(currentPage==='malga'){
+        document.querySelectorAll('[data-menu="racconti"]').forEach(function(el){
+          el.classList.add('is-current');
+        });
+      }
+    }
+
+    function wireDropdown(toggleId,submenu){
+      var toggle=document.getElementById(toggleId);
+      if(!toggle||!submenu)return;
+      toggle.addEventListener('click',function(){
+        var open=toggle.getAttribute('aria-expanded')==='true';
+        toggle.setAttribute('aria-expanded',String(!open));
+        submenu.classList.toggle('is-open',!open);
+      });
+    }
+    wireDropdown('racontiToggle',document.getElementById('racontiSubmenu'));
+    wireDropdown('racontiToggleMobile',document.getElementById('racontiSubmenuMobile'));
+
+    document.addEventListener('click',function(e){
+      var desktopToggle=document.getElementById('racontiToggle');
+      var desktopSub=document.getElementById('racontiSubmenu');
+      if(desktopToggle&&desktopSub&&!desktopToggle.contains(e.target)&&!desktopSub.contains(e.target)){
+        desktopToggle.setAttribute('aria-expanded','false');
+        desktopSub.classList.remove('is-open');
+      }
+    });
+
+    var menuBtn=document.getElementById('siteMenuBtn');
+    var panel=document.getElementById('siteMobilePanel');
+    function closePanel(){
+      panel.classList.remove('is-open');
+      menuBtn.setAttribute('aria-expanded','false');
+      document.body.classList.remove('site-panel-open');
+      syncScroll();
+    }
+    function openPanel(){
+      panel.classList.add('is-open');
+      menuBtn.setAttribute('aria-expanded','true');
+      document.body.classList.add('site-panel-open');
+      header.classList.add('is-solid');
+    }
+    menuBtn.addEventListener('click',function(){
+      var open=menuBtn.getAttribute('aria-expanded')==='true';
+      if(open){closePanel();}else{openPanel();}
+    });
+    panel.addEventListener('click',function(e){
+      if(e.target.tagName==='A'){closePanel();}
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.key!=='Escape')return;
+      if(panel.classList.contains('is-open')){closePanel();menuBtn.focus();}
+      var dTog=document.getElementById('racontiToggle');
+      var dSub=document.getElementById('racontiSubmenu');
+      if(dTog&&dTog.getAttribute('aria-expanded')==='true'){dTog.setAttribute('aria-expanded','false');dSub.classList.remove('is-open');}
+    });
+  })();
+  </script>
 
   <div class="hero-banner-wrap">
     <img class="hero-banner" src="https://res.cloudinary.com/dumit3klq/image/upload/FullSizeRender_cbm8hi.jpg" alt="Pascolo e malga in quota, con le mucche al pascolo tra i boschi della Val di Non" loading="eager">
