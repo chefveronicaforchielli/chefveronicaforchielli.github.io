@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Un giorno in malga: il racconto di Veronica Forchielli sulla giornata AMALGA del 22 agosto a Malga Bordolona, tra pascoli, latte crudo e caseificio.">
-<meta name="keywords" content="AMALGA, Malga Bordolona, Veronica Forchielli, Val di Non, latte crudo, malga Trentino">
-<meta property="og:title" content="Un giorno in malga | Veronica Forchielli">
-<meta property="og:description" content="Il racconto della giornata AMALGA del 22 agosto a Malga Bordolona: pascoli, latte crudo, caseificio e cucina di montagna.">
-<meta property="og:url" content="https://chefveronicaforchielli.it/un-giorno-in-malga.html">
+<meta name="description" content="Un anno di raccolti tra le Marche e il Trentino: gemme di pino mugo, fichi, prugne, olive, zafferano e pomodori verdi, conservati in piccoli lotti. Il racconto di Veronica Forchielli.">
+<meta name="keywords" content="conserve fatte in casa, Veronica Forchielli, mugolio, fichi, olive marchigiane, zafferano, pomodori verdi, Trentino, Marche">
+<meta property="og:title" content="Le mie conserve — Custodire la stagione | Veronica Forchielli">
+<meta property="og:description" content="Un anno di raccolti tra le Marche e il Trentino: gemme di pino mugo, fichi, prugne, olive, zafferano e pomodori verdi, conservati in piccoli lotti. Il racconto di Veronica Forchielli.">
+<meta property="og:url" content="https://chefveronicaforchielli.it/le-mie-conserve.html">
 <meta property="og:type" content="article">
-<meta property="og:image" content="https://res.cloudinary.com/dumit3klq/image/upload/FullSizeRender_cbm8hi.jpg">
-<title>Un giorno in malga | Veronica Forchielli</title>
+<meta property="og:image" content="https://res.cloudinary.com/dumit3klq/image/upload/c_crop,w_0.65,h_1.0,g_west/f_jpg,q_auto,w_1200/v1791364744/IMG_4806_ozm0re.jpg">
+<title>Le mie conserve — Custodire la stagione | Veronica Forchielli</title>
 <style>
   @font-face {
     font-family: 'Fraunces';
@@ -84,7 +84,6 @@
   /* ---------- HERO BANNER ---------- */
   .hero-banner-wrap{position:relative}
   .hero-banner{width:100%;height:clamp(280px,52vh,540px);object-fit:cover;object-position:center 78%;display:block}
-  .hero-banner-caption{position:absolute;bottom:16px;left:clamp(24px,6vw,90px);color:var(--paper);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;text-shadow:0 1px 6px rgba(0,0,0,.6)}
 
   /* ---------- HERO ---------- */
   .story-hero{padding:clamp(32px,5vw,48px) clamp(24px,6vw,90px) clamp(40px,6vw,64px);max-width:820px;margin:0 auto}
@@ -97,6 +96,23 @@
   .story-photo-wrap{margin:clamp(36px,5vw,56px) 0}
   .story-photo{width:100%;height:auto;display:block;border-radius:3px}
   .story-caption{margin-top:12px;font-size:.82rem;color:var(--stone);letter-spacing:.02em}
+  .story-photo-wrap--single{max-width:320px;margin-left:auto;margin-right:auto}
+
+  /* ---------- SECTION HEADINGS & GALLERY ---------- */
+  .story-body h2{
+    font-family:'Fraunces',Georgia,serif;font-weight:400;
+    font-size:clamp(1.5rem,3.2vw,2.1rem);line-height:1.2;
+    margin:clamp(50px,7vw,90px) 0 20px;color:var(--forest);
+  }
+  .story-body h2 .italic{font-style:italic}
+  .story-gallery{
+    display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;
+    margin:clamp(28px,4vw,40px) 0;
+  }
+  .story-gallery .story-photo-wrap{margin:0}
+  @media(max-width:640px){
+    .story-gallery{grid-template-columns:1fr}
+  }
 
   /* ---------- ARTICLE ---------- */
   .story-body{max-width:680px;margin:0 auto;padding:clamp(50px,7vw,80px) clamp(24px,6vw,40px) 20px}
@@ -108,17 +124,7 @@
     margin:clamp(36px,5vw,56px) 0;padding-left:26px;
     border-left:2px solid var(--sage);
   }
-  .pull-cite{display:block;font-family:'Jost',sans-serif;font-style:normal;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--sage-deep);margin-top:12px}
   .signature{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:1.2rem;color:var(--forest);margin-top:8px}
-
-  /* ---------- CREDIT ---------- */
-  .story-credit{
-    max-width:680px;margin:0 auto;padding:24px clamp(24px,6vw,40px) clamp(60px,8vw,100px);
-    border-top:1px solid rgba(44,51,36,.15);
-    font-size:.9rem;color:var(--stone);
-  }
-  .story-credit a{color:var(--forest);text-decoration:underline;text-underline-offset:3px;transition:color .25s}
-  .story-credit a:hover{color:var(--sage-deep)}
 
   /* ---------- CONTACT (identico a index.html) ---------- */
   .contact{
@@ -295,7 +301,7 @@
   }
 </style>
 </head>
-<body data-page="malga">
+<body data-page="conserve">
 
   <header class="site-header" id="siteHeader">
     <div class="site-header-inner">
@@ -423,50 +429,104 @@
   </script>
 
   <div class="hero-banner-wrap">
-    <img class="hero-banner" src="https://res.cloudinary.com/dumit3klq/image/upload/FullSizeRender_cbm8hi.jpg" alt="Pascolo e malga in quota, con le mucche al pascolo tra i boschi della Val di Non" loading="eager">
-    <span class="hero-banner-caption">Malga Bordolona · Val di Non</span>
+    <img class="hero-banner" src="https://res.cloudinary.com/dumit3klq/image/upload/c_crop,w_0.65,h_1.0,g_west/f_auto,q_auto,w_1600/v1791364744/IMG_4806_ozm0re.jpg" width="1600" height="1847" alt="Otto vasetti di vetro con coperchio dorato, pieni di composta scura, su un piano di lavoro con piastrelle decorate sullo sfondo" loading="eager">
   </div>
 
   <main>
     <div class="story-hero">
-      <p class="eyebrow">AMALGA · 22 agosto 2026</p>
-      <h1 class="display">Un giorno <span class="italic">in malga</span></h1>
-      <p class="story-subtitle">Malga Bordolona · Val di Non, Trentino</p>
+      <p class="eyebrow">Le mie conserve</p>
+      <h1 class="display">Custodire la <span class="italic">stagione</span></h1>
     </div>
 
     <article class="story-body">
-      <p>Il 22 agosto abbiamo aperto le porte di Malga Bordolona per raccontare qualcosa che di solito resta dietro le quinte: il lavoro di chi vive in quota, la fatica e la bellezza di mantenere viva una tradizione che rischia, ogni anno di più, di perdersi tra burocrazia, costi e mancanza di ricambio generazionale.</p>
+      <p>Ci sono ingredienti che raggiungono un istante di perfezione difficile da dimenticare: il profumo intenso di un'albicocca matura, la dolcezza di un fico raccolto al sole di fine estate, la fragranza di un pomodoro appena colto. Le mie conserve nascono dal desiderio di tenerlo ancora un po', quell'istante, e di portarlo oltre il tempo della raccolta.</p>
 
-      <div class="story-photo-wrap">
-        <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/IMG_4657_k5qqvn.jpg" alt="Veronica Forchielli in tenuta da chef tra i pascoli in quota, con due cavalli al pascolo sullo sfondo" loading="lazy">
-        <p class="story-caption">Tra i pascoli in quota, durante la giornata di AMALGA.</p>
+      <p>Ho raccolto e preparato tutto io, e non in un giorno solo: il lavoro ha seguito l'anno, un raccolto dopo l'altro, tra le Marche e il Trentino.</p>
+
+      <h2 class="display">In primavera, tra i <span class="italic">mughi</span></h2>
+      <p>Tra i mughi, in alta quota sopra Madonna di Campiglio, ho raccolto le gemme del pino mugo. Con zucchero di canna grezzo e miele di acacia sono diventate mugolio, una ricetta di tradizione nata come sciroppo per la gola. Dai boschi di montagna è arrivato invece l'aglio orsino, con le foglie ancora bagnate e il fiore bianco.</p>
+
+      <div class="story-gallery">
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/f_auto,q_auto,w_900/v1791364749/065700dd-ce86-468d-be8e-0901c06fa76d_nizf7w.jpg" width="900" height="1200" alt="Una gemma di pino mugo, con le montagne dietro" loading="lazy">
+          <p class="story-caption">Una gemma di pino mugo, con le montagne dietro.</p>
+        </div>
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/f_auto,q_auto,w_900/v1791364752/784CFB33-AB39-4235-BB91-FFF7A954D36C_yvqln2.jpg" width="900" height="1600" alt="Le gemme di pino mugo in vaso" loading="lazy">
+          <p class="story-caption">Le gemme in vaso.</p>
+        </div>
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/f_auto,q_auto,w_900/v1791364750/36F9BC29-E35D-4263-8066-584524906EC3_fwobty.jpg" width="900" height="1600" alt="Il fiore dell'aglio orsino" loading="lazy">
+          <p class="story-caption">Il fiore dell'aglio orsino.</p>
+        </div>
       </div>
 
-      <p>AMALGA nasce da questa preoccupazione e da un'idea più semplice: raccontare la malga per quello che è davvero, senza ridurla a una cartolina. Riunisce tre luoghi della Val di Non che ho imparato a conoscere pian piano: Malga Pradedont–El Malget, aperta tutto l'anno con ristorante e fattoria didattica; Bordolona Bassa, a 1.830 metri, cuore produttivo dell'estate; e Bordolona Alta, oltre i 2.000, un piccolo rifugio dove fermarsi prima di un'escursione.</p>
+      <h2 class="display">In estate, tra Dro e <span class="italic">Ragoli</span></h2>
+      <p>Sono arrivati i pomodori, di ogni forma e colore: costoluti, allungati, minuscoli. A Dro ho preso le prugne biologiche, le ho tagliate a dadini e lasciate sotto zucchero. A Ragoli ho raccolto i fichi: alcuni li ho cotti interi con zucchero semolato, vino, vaniglia e limone, e li ho ricoperti di grappa. Altri li ho tagliati a metà, asciugati in forno con sale e pepe e messi in barattolo con il grasso sciolto del prosciutto.</p>
 
-      <p>La giornata del 22 agosto è stato il passo per mostrarla da vicino. Colazione all'alba, la raccolta di erbe spontanee con Ferruccio "Fèro" Valentini, il brunch sul prato, la visita al caseificio, la merenda, l'aperitivo, e infine la cena; non tappe separate, ma un unico filo: dal pascolo al latte, dal latte al lavoro del casaro, dai formaggi alla cucina.</p>
-
-      <div class="story-photo-wrap">
-        <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/Fero_v81v69.jpg" alt="Veronica Forchielli con Ferruccio «Fèro» Valentini durante la raccolta di erbe spontanee sul pascolo" loading="lazy">
-        <p class="story-caption">Con Ferruccio «Fèro» Valentini, durante la raccolta di erbe spontanee.</p>
+      <div class="story-gallery">
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/f_auto,q_auto,w_900/v1791364748/IMG_4586_ywhrxm.jpg" width="900" height="1200" alt="Pomodori in vari stadi di maturazione, legati al tutore" loading="lazy">
+          <p class="story-caption">Pomodori in vari stadi di maturazione, legati al tutore.</p>
+        </div>
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/f_auto,q_auto,w_900/v1791364745/IMG_4798_wg1gzu.jpg" width="900" height="876" alt="Fichi verdi" loading="lazy">
+          <p class="story-caption">Fichi verdi.</p>
+        </div>
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/f_auto,q_auto,w_900/v1791364747/IMG_4801_m78kvo.jpg" width="900" height="1200" alt="I fichi in cottura con zucchero e vaniglia" loading="lazy">
+          <p class="story-caption">I fichi in cottura con zucchero e vaniglia.</p>
+        </div>
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/f_auto,q_auto,w_900/v1791364750/IMG_8908_pja0em.jpg" width="900" height="1200" alt="Fichi tagliati a metà" loading="lazy">
+          <p class="story-caption">Fichi tagliati a metà.</p>
+        </div>
       </div>
 
-      <p>In cucina con me, quel giorno, anche Riccardo Paglia e Gianluca Pittigher — due persone il cui percorso si intreccia da anni con la Val di Non e con questa famiglia.</p>
+      <h2 class="display">A fine stagione, quelli che <span class="italic">restano</span></h2>
+      <p>Alla fine sono arrivati i pomodori verdi del mio orto di Ragoli, quelli che non hanno fatto in tempo a maturare. Li ho lavati, tagliati e lasciati una notte a macerare nel sale marino. Il giorno dopo li ho pressati, per far uscire tutta l'acqua, nemica delle conserve. Poi li ho conditi con prezzemolo, aglio, menta e olio extravergine d'oliva, e li ho lasciati almeno cinque ore a insaporirsi, prima di metterli nei vasetti.</p>
 
-      <p>Ma il cuore di tutto resta il caseificio, e chi lo fa vivere ogni giorno: Luca Alessandri, casaro laureato in filosofia, che lavora il latte crudo dalla metà di giugno alla metà di settembre, due mungiture al giorno, senza pastorizzarlo né termizzarlo.</p>
+      <p class="italic" style="font-size:.92rem;color:var(--stone)">Questo è il racconto del mio lavoro, non una ricetta: il sott'olio fatto in casa richiede accorgimenti di sicurezza precisi.</p>
 
-      <p class="pull">«Tutto quello che c'è nel latte viene trasformato»<span class="pull-cite">Luca Alessandri</span></p>
+      <div class="story-gallery">
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/f_auto,q_auto,w_900/v1791363475/IMG_5016_zklpep.jpg" width="900" height="1200" alt="I pomodori verdi" loading="lazy">
+          <p class="story-caption">I pomodori verdi.</p>
+        </div>
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/f_auto,q_auto,w_900/v1791524676/IMG_5051_vou8f3.jpg" width="900" height="1200" alt="Pomodori verdi tagliati e lasciati una notte a macerare nel sale marino" loading="lazy">
+          <p class="story-caption">Tagliati e lasciati una notte a macerare nel sale marino.</p>
+        </div>
+      </div>
 
-      <p>Ed è forse la frase che racconta meglio cosa significhi lavorare così: una responsabilità enorme, fatta di controlli e attenzione continua, per mantenere viva una tradizione che altrove si è quasi persa.</p>
+      <h2 class="display">In autunno, dalle Marche alla <span class="italic">montagna</span></h2>
+      <p>Le olive nere sono marchigiane, dall'uliveto in provincia di Pesaro Urbino: le ho messe in barattolo, o in anfora, con aglio rosso, sale marino e finocchietto selvatico. L'aglio rosso l'ho raccolto nelle Marche, e lo zafferano nell'orto di un amico: i fiori viola si raccolgono a mano, uno per uno, e ognuno ha solo tre stimmi. Poi, in montagna, ho raccolto le rose canine, con i cinorrodi rossi e lucidi.</p>
 
-      <p>Ogni malga ha il suo formaggio, diverso da quello della malga accanto: il pascolo, l'acqua, la mano del casaro. A Bordolona, quando le vacche tornano all'erba fresca, il burro e i formaggi assumono quel colore giallo che non si può imitare in nessun altro modo.</p>
+      <div class="story-gallery">
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/c_crop,w_1.0,h_0.72,g_south/f_auto,q_auto,w_900/v1791364751/1f240ef3-a55b-4c35-8641-99a46343b238_wrfxw5.jpg" width="900" height="864" alt="Olive sul ramo" loading="lazy">
+          <p class="story-caption">Olive sul ramo.</p>
+        </div>
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/f_auto,q_auto,e_improve,w_900/v1791364751/IMG_4550_cnw9uu.jpg" width="900" height="1200" alt="Le olive nere con aglio rosso e finocchietto selvatico" loading="lazy">
+          <p class="story-caption">Le olive nere con aglio rosso e finocchietto selvatico.</p>
+        </div>
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/f_auto,q_auto,w_900/v1791364752/IMG_2322_uaryu8.jpg" width="900" height="1200" alt="L'aglio rosso delle Marche" loading="lazy">
+          <p class="story-caption">L'aglio rosso delle Marche.</p>
+        </div>
+        <div class="story-photo-wrap">
+          <img class="story-photo" src="https://res.cloudinary.com/dumit3klq/image/upload/f_auto,q_auto,w_900/v1791364748/7799f11a-931f-424b-bc46-fea017b14713_xb7o4v.jpg" width="900" height="1200" alt="I fiori dello zafferano" loading="lazy">
+          <p class="story-caption">I fiori dello zafferano.</p>
+        </div>
+      </div>
 
-      <p>Salvare questa cultura non vuol dire fermarla nel tempo, come in una fotografia. Vuol dire lasciarla vivere nel presente, ed è esattamente quello che abbiamo provato a fare, il 22 agosto, a Malga Bordolona.</p>
+      <p>In dispensa ci sono le Marche e il Trentino. Sono cresciuta in campagna, con mia madre in macelleria e mio padre tra gli ulivi e gli animali, e ho imparato a non sprecare quello che la terra dà.</p>
+
+      <p class="pull">Un vasetto non contiene soltanto una preparazione. Custodisce una stagione.</p>
 
       <p class="signature">Veronica Forchielli</p>
     </article>
-
-    <p class="story-credit">L'evento è stato raccontato anche da <a href="https://www.cibovagare.it/cacio/amalga-la-malga-come-patrimonio-vivo-tra-latte-crudo-e-pascoli-del-trentino-2-4395.html" target="_blank" rel="noopener">Cibovagare</a>.</p>
   </main>
 
   <!-- CONTACT -->

@@ -338,14 +338,14 @@
     border-bottom-color:rgba(43,44,34,.14);
   }
   .site-brand{
-    font-family:'Fraunces','Georgia','Times New Roman',serif;font-style:italic;font-weight:500;
-    font-size:clamp(1.05rem,2vw,1.3rem);
-    color:#f1f0e3;text-shadow:0 1px 5px rgba(0,0,0,.55);
-    text-decoration:none;white-space:nowrap;
-    transition:color .35s ease,text-shadow .35s ease;
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:11px;margin:-11px;border-radius:50%;
+    color:#f1f0e3;filter:drop-shadow(0 1px 5px rgba(0,0,0,.55));
+    text-decoration:none;
+    transition:color .35s ease,filter .35s ease,opacity .25s ease;
   }
-  .site-header.is-solid .site-brand{color:#2b2c22;text-shadow:none}
-  .site-brand.is-current{text-decoration:underline;text-underline-offset:4px}
+  .site-header.is-solid .site-brand{color:#2b2c22;filter:none}
+  .site-brand-icon{width:22px;height:22px;display:block}
 
   .site-nav{display:flex}
   .site-nav > ul{display:flex;align-items:center;gap:clamp(20px,3vw,40px);list-style:none;margin:0;padding:0}
@@ -357,7 +357,8 @@
     transition:color .35s ease,text-shadow .35s ease,opacity .25s ease;
   }
   .site-header.is-solid .site-nav a,.site-header.is-solid .site-nav-toggle{color:#2b2c22;text-shadow:none}
-  .site-nav a:hover,.site-nav-toggle:hover{opacity:.72}
+  .site-nav a:hover,.site-nav-toggle:hover,.site-brand:hover{opacity:.72}
+  .site-nav a:focus-visible,.site-nav-toggle:focus-visible,.site-brand:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:4px}
   .site-nav a.is-current,.site-nav-toggle.is-current{text-decoration:underline;text-underline-offset:4px}
   .site-caret{font-size:.65em;transition:transform .25s ease}
   .site-nav-toggle[aria-expanded="true"] .site-caret{transform:rotate(180deg)}
@@ -410,6 +411,7 @@
   .site-mobile-panel nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
   .site-mobile-panel nav a,.site-mobile-panel nav .site-nav-toggle{
     font-size:1.5rem;font-family:'Fraunces',Georgia,serif;font-weight:400;
+    text-transform:none;letter-spacing:normal;
     color:#2b2c22;text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(43,44,34,.12);
     display:flex;align-items:center;justify-content:space-between;width:100%;
     background:none;border-left:none;border-right:none;border-top:none;text-align:left;cursor:pointer;
@@ -438,7 +440,12 @@
 
   <header class="site-header" id="siteHeader">
     <div class="site-header-inner">
-      <a href="index.html" class="site-brand" data-page-id="home">Veronica Forchielli</a>
+      <a href="index.html" class="site-brand" data-page-id="home" aria-label="Home page" title="Home page">
+        <svg class="site-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M3.5 10.5 12 3.5l8.5 7"/>
+          <path d="M5.5 9.5V19a1 1 0 0 0 1 1H9v-5.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1V20h2.5a1 1 0 0 0 1-1V9.5"/>
+        </svg>
+      </a>
 
       <nav class="site-nav" aria-label="Navigazione principale">
         <ul>
@@ -447,6 +454,7 @@
             <button type="button" class="site-nav-toggle" id="racontiToggle" aria-expanded="false" aria-controls="racontiSubmenu" data-menu="racconti">Racconti <span class="site-caret" aria-hidden="true">▾</span></button>
             <ul class="site-submenu" id="racontiSubmenu">
               <li><a href="un-giorno-in-malga.html" data-page-id="malga">Un giorno in malga</a></li>
+              <li><a href="le-mie-conserve.html" data-page-id="conserve">Le mie conserve</a></li>
             </ul>
           </li>
           <li><a href="rassegna-stampa.html" data-page-id="rassegna">Rassegna stampa</a></li>
@@ -467,6 +475,7 @@
             <button type="button" class="site-nav-toggle site-nav-toggle-mobile" id="racontiToggleMobile" aria-expanded="false" aria-controls="racontiSubmenuMobile" data-menu="racconti">Racconti <span class="site-caret" aria-hidden="true">▾</span></button>
             <ul class="site-submenu site-submenu-mobile" id="racontiSubmenuMobile">
               <li><a href="un-giorno-in-malga.html" data-page-id="malga">Un giorno in malga</a></li>
+              <li><a href="le-mie-conserve.html" data-page-id="conserve">Le mie conserve</a></li>
             </ul>
           </li>
           <li><a href="rassegna-stampa.html" data-page-id="rassegna">Rassegna stampa</a></li>
@@ -495,7 +504,7 @@
         el.classList.add('is-current');
         el.setAttribute('aria-current','page');
       });
-      if(currentPage==='malga'){
+      if(currentPage==='malga'||currentPage==='conserve'){
         document.querySelectorAll('[data-menu="racconti"]').forEach(function(el){
           el.classList.add('is-current');
         });
@@ -673,6 +682,7 @@
     <a class="mail" href="mailto:chef@chefveronicaforchielli.it">chef@chefveronicaforchielli.it</a>
     <div class="phone">+39 334 161 1421</div>
     <a href="un-giorno-in-malga.html" class="press-nav-link">Un giorno in malga — il racconto di AMALGA</a>
+    <a href="le-mie-conserve.html" class="press-nav-link">Le mie conserve</a>
     <a href="allergeni.html" class="press-nav-link">Allergeni</a>
     <a href="rassegna-stampa.html" class="press-nav-link">Rassegna stampa</a>
     <a href="#privacy" class="privacy-link" onclick="document.getElementById('privacy-modal').style.display='flex';return false;">Privacy &amp; Cookie Policy</a>
